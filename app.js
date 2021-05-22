@@ -1,6 +1,7 @@
 // Required libraries
 const express = require('express');
 const fetch = require('node-fetch');
+const axios = require('axios');
 
 // App Setup
 const app = express();
@@ -14,15 +15,15 @@ app.set('view engine', 'handlebars');
 // Routes
 app.get('/', async (req, res) => {
 
-    let inputDate = '';
-    if(req.query.inputDate) {
-        inputDate = req.query.inputDate;
+    date = '';
+    if(req.query.date) {
+        date = req.query.date;
     }
 
     const options = {
         method: 'GET',
         url: 'https://covid-19-statistics.p.rapidapi.com/reports/total',
-        qs: {date: '2020-04-07'},
+        params: { date: date },
         headers: {
           'x-rapidapi-key': '47fe7c30a9msh577ff8aaac05bb1p147aaajsn19d0abdba1c4',
           'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
@@ -31,10 +32,11 @@ app.get('/', async (req, res) => {
     };
 
     try {
-        const response = await fetch(options.url, options);
-        const data = await response.json();
-        console.log(data);
-        res.render('home', { data });
+        const response = await axios.request(options);
+        const jsonData = await response.data;
+        const covidData = jsonData.data;
+        console.log(covidData);
+        res.render('home', { covidData });
     } catch(err) { 
     console.log(err);
     }

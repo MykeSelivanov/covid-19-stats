@@ -2,10 +2,16 @@
 <h2>Input Date yyyy-mm-dd format</h2>
 
 <form action="/">
-  <input type="text" name="date">
+  <input type="text" name="date" placeholder="yyyy-mm-dd">
   <button type="submit">Search</button>
 </form>
 
 <div class="covidResults">
-    
+            <h3 id="date">Date: {{covidData.date}}</h3>
+            <h3 id="last_update">Last update: {{covidData.last_update}}</h3>
+            <h3 id="confirmed">Confirmed: {{covidData.confirmed}}</h3>
+            <h3 id="deaths">Deaths: {{covidData.deaths}}</h3>
+            <h3 id="recovered">Recovered: {{covidData.recovered}}</h3>
+            <h3 id="active">Active: {{covidData.active}}</h3>
+            <h3 id="fatality_rate">Fatality rate: {{covidData.fatality_rate}}</h3>
 </div>
